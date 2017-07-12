@@ -51,10 +51,11 @@ let container = document.querySelector('.container');
 
 function writeBlogPost(post) {
   let div = document.createElement('div');
-  let article =
-  `<artticle>
-    <h2>${ post.title }</h2>
-    <div class="meta">
+  let article = document.createElement('article');
+  let h2 = document.createElement('h2');
+  let hr = document.createElement('hr');
+  let postContent =
+    `<div class="meta">
       <span class="date">${ post.meta.date }</span>
     </div>
     <img src="${ post.post.image }" />
@@ -63,18 +64,25 @@ function writeBlogPost(post) {
     </div>
     <div class="site">
       Part of this content was pulled from <a href="${ post.site.url }">${ post.site.name }</a>.
-    </div>
-  </article>
-  <hr />`;
+    </div>`;
 
-  div.innerHTML = article;
+  h2.textContent = post.title;
+  article.innerHTML = postContent;
+  article.classList.add('hide');
+  div.appendChild(h2);
+  div.appendChild(article);
+  div.appendChild(hr);
   container.appendChild(div);
+  h2.addEventListener('click', function() {
+    article.classList.toggle('hide');
+  });
 }
 
 function fillBlog() {
   for(i = blogPosts.length - 1; i >= 0; i--) {
     writeBlogPost(blogPosts[i]);
   };
+  document.querySelector('article').classList.remove('hide');
 }
 
 fillBlog();

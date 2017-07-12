@@ -44,3 +44,7 @@ h2 {
   color: #4cdbb0;
   text-decoration: none;
 }
+
+.hide {
+  display: none;
+}
