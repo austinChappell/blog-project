@@ -90,12 +90,6 @@ function writeBlogPost(post) {
   bodyDiv.classList.add('hide');
   bodyDiv.classList.add('body-div');
 
-  headerDiv.addEventListener('click', function() {
-
-    bodyDiv.classList.toggle('hide');
-
-  });
-
 }
 
 function fillBlog() {
@@ -109,3 +103,14 @@ function fillBlog() {
 }
 
 fillBlog();
+
+container.addEventListener('click', function(e) {
+  console.log(e.target.parentNode.className);
+  if (e.target.parentNode.className === 'header-div') {
+    e.target.parentNode.nextSibling.classList.toggle('hide');
+  } else if (e.target.parentNode.parentNode.parentNode.className === 'header-div') {
+    e.target.parentNode.parentNode.parentNode.nextSibling.classList.toggle('hide');
+  } else if (e.target.className === 'meta') {
+    e.target.parentNode.parentNode.nextSibling.classList.toggle('hide');
+  };
+});
