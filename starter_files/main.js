@@ -50,15 +50,22 @@ let blogPosts = [
 let container = document.querySelector('.container');
 
 function writeBlogPost(post) {
-  let div = document.createElement('div');
+
+  let wrapperDiv = document.createElement('div');
+  let headerDiv = document.createElement('div');
+  let bodyDiv = document.createElement('div');
+  let metaDiv = document.createElement('div');
   let article = document.createElement('article');
   let h2 = document.createElement('h2');
   let hr = document.createElement('hr');
+
+  metaDiv.innerHTML =
+  `<div class="meta">
+    <span class="date">${ post.meta.date }</span>
+  </div>`;
+
   let postContent =
-    `<div class="meta">
-      <span class="date">${ post.meta.date }</span>
-    </div>
-    <img src="${ post.post.image }" />
+    `<img src="${ post.post.image }" />
     <div class="post">
       ${ post.post.content }
     </div>
@@ -68,21 +75,37 @@ function writeBlogPost(post) {
 
   h2.textContent = post.title;
   article.innerHTML = postContent;
-  article.classList.add('hide');
-  div.appendChild(h2);
-  div.appendChild(article);
-  div.appendChild(hr);
-  container.appendChild(div);
-  h2.addEventListener('click', function() {
-    article.classList.toggle('hide');
+
+  headerDiv.appendChild(h2);
+  headerDiv.appendChild(metaDiv);
+  headerDiv.classList.add('header-div');
+  bodyDiv.appendChild(article);
+
+  wrapperDiv.appendChild(headerDiv);
+  wrapperDiv.appendChild(bodyDiv);
+  wrapperDiv.appendChild(hr);
+
+  container.appendChild(wrapperDiv);
+
+  bodyDiv.classList.add('hide');
+  bodyDiv.classList.add('body-div');
+
+  headerDiv.addEventListener('click', function() {
+
+    bodyDiv.classList.toggle('hide');
+
   });
+
 }
 
 function fillBlog() {
+
   for(i = blogPosts.length - 1; i >= 0; i--) {
     writeBlogPost(blogPosts[i]);
   };
-  document.querySelector('article').classList.remove('hide');
+
+  document.querySelector('.body-div').classList.remove('hide');
+
 }
 
 fillBlog();

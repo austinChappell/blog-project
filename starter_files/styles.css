@@ -13,11 +13,12 @@ img {
 h2 {
   font-size: 25px;
   color: #4cdbb0;
-  margin-bottom: 0;
+  margin: 0;
+  padding-top: 20px;
 }
 
 .meta {
-  margin: 15px 0;
+  padding: 15px 0;
   font-style: italic;
   color: #ff5d6b;
 }
@@ -47,4 +48,13 @@ h2 {
 
 .hide {
   display: none;
+}
+
+.header-div {
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+hr {
+  margin: 0;
 }
