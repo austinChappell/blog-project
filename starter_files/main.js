@@ -104,13 +104,16 @@ function fillBlog() {
 
 fillBlog();
 
-container.addEventListener('click', function(e) {
-  console.log(e.target.parentNode.className);
-  if (e.target.parentNode.className === 'header-div') {
-    e.target.parentNode.nextSibling.classList.toggle('hide');
-  } else if (e.target.parentNode.parentNode.parentNode.className === 'header-div') {
-    e.target.parentNode.parentNode.parentNode.nextSibling.classList.toggle('hide');
-  } else if (e.target.className === 'meta') {
-    e.target.parentNode.parentNode.nextSibling.classList.toggle('hide');
+function isElementHeaderDiv(el) {
+  if (el.className === 'header-div') {
+    el.nextSibling.classList.toggle('hide');
+  } else {
+    el = el.parentNode;
+    isElementHeaderDiv(el);
   };
+};
+
+container.addEventListener('click', function(e) {
+  let target = e.target;
+  isElementHeaderDiv(target);
 });
